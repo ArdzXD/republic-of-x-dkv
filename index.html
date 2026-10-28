@@ -18,6 +18,10 @@
 <script>
 'use strict';
 const STORAGE_KEY='rox_dkv_demo_data_v1';
+ const supabaseClient = window.supabase.createClient(
+  'https://xwpybmqueudegevweqqi.supabase.co',
+  'sb_publishable_A5FBsPqHDV_Cj1Inj8fL6Q_UyoVUbGh'
+);
 const DEMO_ADMINS=[
  {username:'adminutama',name:'Admin Utama',role:'admin',pin:'ROX-ADMIN-DEMO'},
  {username:'ketuakelas',name:'Ketua Kelas',role:'admin',pin:'ROX-KELAS-DEMO'},
