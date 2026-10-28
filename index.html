@@ -190,4 +190,39 @@ boot();
 })();
 </script>
 </body>
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(async function () {
+  const SUPABASE_URL = 'https://xwpybmqueudegevweqqi.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_A5FBsPqHDV_Cj1Inj8fL6Q_UyoVUbGh';
+
+  const status = document.createElement('div');
+  status.style.cssText =
+    'position:fixed;bottom:12px;left:12px;z-index:99999;' +
+    'background:#231d3d;color:white;padding:12px 16px;' +
+    'border-radius:12px;font:13px Arial;max-width:85vw;';
+  status.textContent = 'Menguji koneksi Supabase...';
+  document.body.appendChild(status);
+
+  try {
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const { data, error } = await db
+      .from('rox_portal_settings')
+      .select('portal_name')
+      .limit(1);
+
+    if (error) throw error;
+
+    status.textContent = data.length
+      ? 'Supabase terhubung! ' + data[0].portal_name
+      : 'Terhubung, tetapi tabel belum berisi data.';
+  } catch (error) {
+    status.textContent = 'Koneksi gagal: ' + error.message;
+  }
+})();
+ </script>
 </html>
